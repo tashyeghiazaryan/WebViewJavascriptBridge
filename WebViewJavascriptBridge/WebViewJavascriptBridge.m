@@ -19,8 +19,7 @@
 #endif
 
 @implementation WebViewJavascriptBridge {
-    WVJB_WEAK WVJB_WEBVIEW_TYPE* _webView;
-    WVJB_WEAK id _webViewDelegate;
+
     long _uniqueId;
     WebViewJavascriptBridgeBase *_base;
 }
@@ -44,17 +43,6 @@
         return (WebViewJavascriptBridge*) [WKWebViewJavascriptBridge bridgeForWebView:webView];
     }
 #endif
-    if ([webView isKindOfClass:[WVJB_WEBVIEW_TYPE class]]) {
-        WebViewJavascriptBridge* bridge = [[self alloc] init];
-        [bridge _platformSpecificSetup:webView];
-        return bridge;
-    }
-    [NSException raise:@"BadWebViewType" format:@"Unknown web view type."];
-    return nil;
-}
-
-- (void)setWebViewDelegate:(WVJB_WEBVIEW_DELEGATE_TYPE*)webViewDelegate {
-    _webViewDelegate = webViewDelegate;
 }
 
 - (void)send:(id)data {
@@ -94,14 +82,11 @@
  *****************************/
 
 - (void)dealloc {
-    [self _platformSpecificDealloc];
-    _base = nil;
-    _webView = nil;
-    _webViewDelegate = nil;
+
 }
 
 - (NSString*) _evaluateJavascript:(NSString*)javascriptCommand {
-    return [_webView stringByEvaluatingJavaScriptFromString:javascriptCommand];
+
 }
 
 #if defined WVJB_PLATFORM_OSX

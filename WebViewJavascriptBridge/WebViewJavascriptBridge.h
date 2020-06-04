@@ -25,7 +25,7 @@
 #elif defined __IPHONE_OS_VERSION_MAX_ALLOWED
 #endif
 
-@interface WebViewJavascriptBridge : WVJB_WEBVIEW_DELEGATE_INTERFACE
+@interface WebViewJavascriptBridge
 
 
 + (instancetype)bridgeForWebView:(id)webView;
